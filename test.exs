@@ -1,17 +1,34 @@
 #!/usr/local/bin/elixir
-IO.puts("Welcome to Tic Tac Toe")
-IO.puts("Please select one option")
-IO.puts("pres 1: player to player")
-IO.puts("pres 2: player to bot")
-IO.puts("pres 3: help")
 defmodule Solution do
-    def check(board) do
+    def check(board, symbol, player) do
 	for row <- 0..2 do
 		x = board |> Enum.at(row)
-		for col <- 0..2 do
-			x |> Enum.at(col)
+		if Enum.at(x, 0) === Enum.at(x, 1) and Enum.at(x, 2) === symbol and Enum.at(x, 2) === Enum.at(x, 0) do
+			IO.puts player
+			read()
 		end
+		
 	end
+	for row <- 0..2 do
+	    initial = board|>Enum.at(row)|>Enum.at(0)
+	    IO.puts(initial)
+	    count = 0
+	    for colum <- 0..2 do    
+		value = board|>Enum.at(row)|>Enum.at(colum)
+		IO.puts(value)
+		if value === initial and value !== " " do
+		   count = count + 1
+		   IO.puts(count)
+		end
+		IO.puts("-----")
+	    end
+	    if count == 3 do
+	       if initial == symbol do
+		  IO.puts player
+		  read()
+	       end
+	    end
+	   end	
     end
     def update_list(board, idx, player) do
 		x = idx - 1 |> div 3
@@ -25,7 +42,7 @@ defmodule Solution do
 		data = IO.read(:stdio, :line) |> String.trim |> String.to_integer
 		board = update_list(board, data, "X")
 		print_grid(board) 
-		#check(board)
+		check(board, "X", "Player 1 Won")
 		#board	
 		#|> Enum.at(data - 1 |> div 3)		
 		#|> Enum.at(data - 1 |> rem 3)
@@ -34,7 +51,7 @@ defmodule Solution do
 		data = IO.read(:stdio, :line) |> String.trim |> String.to_integer
 		board = update_list(board, data, "O")
 		print_grid(board) 
-		#check(board)
+		check(board, "O", "Player 2 Won")
 		#board
 		#|> Enum.at(data - 1 |> div 3)		
 		#|> Enum.at(data - 1 |> rem 3)
@@ -80,6 +97,11 @@ defmodule Solution do
 	ptp_play(board)
     end
     def read do
+	IO.puts("Welcome to Tic Tac Toe")
+	IO.puts("Please select one option")
+	IO.puts("pres 1: player to player")
+	IO.puts("pres 2: player to bot")
+	IO.puts("pres 3: help")
         case IO.read(:stdio, :line) do
             :eof -> :ok
             {:error, reason} -> IO.puts "Error: #{reason}"
