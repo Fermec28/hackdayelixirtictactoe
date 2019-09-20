@@ -5,13 +5,28 @@ IO.puts("pres 1: player to player")
 IO.puts("pres 2: player to bot")
 IO.puts("pres 3: help")
 defmodule Solution do
-    def print_grid do
+    def ptp_play(board) do
+		IO.puts "player 1(X)  waiting......"
+		data = IO.read(:stdio, :line) |> String.trim |> String.to_integer
+		board	
+		|> Enum.at(data - 1 |> div 3)		
+		|> Enum.at(data - 1 |> rem 3)
+		|> IO.puts()
+		IO.puts "player 2(O)  waiting......"
+		data = IO.read(:stdio, :line) |> String.trim |> String.to_integer
 		board
-        	for row <- 1..3 do
-      			for col <- 1..3 do
-        			" " <> board[{col, row}]
+		|> Enum.at(data - 1 |> div 3)		
+		|> Enum.at(data - 1 |> rem 3)
+		|> IO.puts()
+    end
+    def print_grid(board) do
+        	for row <- 0..2 do
+      			for col <- 0..2 do
+        			board
+				|> Enum.at(row)
+				|> Enum.at(col)
       			end
-      			|> Enum.join(" |")
+      			|> Enum.join("  |")
     		end
     		|> Enum.join("\n---+---+---\n")
     		|> IO.puts()
@@ -22,11 +37,21 @@ defmodule Solution do
     end
     def ptp do
 	IO.puts "you have choosen player to player mode"
-	print_grid()
+	IO.puts "use numbers 1..9\n"
+	board = [["1","2","3"], ["4","5","6"], ["7","8","9"]] 
+	print_grid(board)
+	IO.puts "\nLet's play"
+	#board = [[" "," "," h"], [" "," "," "], [" "," "," "]] 
+	print_grid(board)
     end
     def ptb do
 	IO.puts "you have choosen player to bot mode "
-	print_grid()
+	IO.puts "use numbers 1..9\n"
+	board = [["1","2","3"], ["4","5","6"], ["7","8","9"]] 
+	print_grid(board)
+	IO.puts "\nLet's play"
+	#board = [[" "," "," "], [" "," "," "], [" "," "," "]] 
+	print_grid(board)
     end
     def read do
         case IO.read(:stdio, :line) do
