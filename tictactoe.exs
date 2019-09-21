@@ -82,7 +82,6 @@ defmodule Solution do
 		#|> Enum.at(data - 1 |> rem 3)
 		#|> IO.puts()
 		if turn === 2 do
-			IO.puts "player 2(O)  waiting......"
 			data = :rand.uniform(9)
 			sym = get_at_index(board, data)
 			if sym !== " " do
