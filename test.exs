@@ -56,6 +56,51 @@ defmodule Solution do
 		#foo = List.replace_at(foo,0,List.replace_at(Enum.at(foo,1),0,5))
 		board |> Enum.at(x) |> Enum.at(y)
     end
+    def ptb_play(board, counter, turn) do
+		if turn === 1 do
+			IO.puts "player 1(X)  waiting......"
+			data = IO.read(:stdio, :line) |> String.trim |> String.to_integer
+			if data > 9 or data < 0 do 
+				IO.puts "Invalid position"
+				ptb_play(board, counter, 1)
+			end
+			sym = get_at_index(board, data)
+			if sym !== " " do
+				IO.puts "Invalid position"
+				ptb_play(board, counter, 1)
+			end
+			board = update_list(board, data, "X")
+			print_grid(board) 
+			check(board, "X", "Player 1 Won")
+			counter = counter + 1
+			if counter < 10 do
+				ptb_play(board, counter, 2)
+			end
+		end
+		#board	
+		#|> Enum.at(data - 1 |> div 3)		
+		#|> Enum.at(data - 1 |> rem 3)
+		#|> IO.puts()
+		if turn === 2 do
+			IO.puts "player 2(O)  waiting......"
+			data = :rand.uniform(9)
+			sym = get_at_index(board, data)
+			if sym !== " " do
+				ptb_play(board, counter, 2)
+			end
+			board = update_list(board, data, "O")
+			print_grid(board) 
+			check(board, "O", "Tic Tac Toe  Won")
+			counter = counter + 1
+			if counter < 10 do
+				ptb_play(board, counter, 1)
+			end
+		end
+		#board
+		#|> Enum.at(data - 1 |> div 3)		
+		#|> Enum.at(data - 1 |> rem 3)
+		#|> IO.puts()
+    end
     def ptp_play(board, counter, turn) do
 		if turn === 1 do
 			IO.puts "player 1(X)  waiting......"
@@ -140,7 +185,7 @@ defmodule Solution do
 	IO.puts "\nLet's play"
 	board = [[" "," "," "], [" "," "," "], [" "," "," "]] 
 	print_grid(board)
-	ptp_play(board, 0, 1)
+	ptb_play(board, 0, 1)
     end
     def read do
 	IO.puts("Welcome to Tic Tac Toe")
