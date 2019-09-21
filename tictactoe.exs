@@ -117,7 +117,7 @@ defmodule Solution do
 			print_grid(board)
 			check(board, "X", "Player 1 Won")
 			counter = counter + 1
-			if counter < 9 do
+			if counter < 10 do
 				ptp_play(board, counter, 2)
 			end
 		end
