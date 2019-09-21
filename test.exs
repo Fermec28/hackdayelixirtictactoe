@@ -3,6 +3,7 @@ defmodule Solution do
   def check(board, symbol, player) do
     for row <- 0..2 do
       x = board |> Enum.at(row)
+      IO.puts "Que es " + x
       if Enum.at(x, 0) === Enum.at(x, 1) and Enum.at(x, 2) === symbol and Enum.at(x, 2) === Enum.at(x, 0) do
         IO.puts player
         read()
@@ -31,8 +32,8 @@ defmodule Solution do
   end
 
   def update_list(board, idx, player) do
-		x = idx - 1 |> div 3
-		y = idx - 1 |> rem 3
+		x = (idx - 1) |> div 3
+		y = (idx - 1) |> rem 3
 		#foo = List.replace_at(foo,0,List.replace_at(Enum.at(foo,1),0,5))
 		board = List.replace_at(board, x, List.replace_at(Enum.at(board, x), y, player))
   end
