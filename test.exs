@@ -1,5 +1,19 @@
 #!/usr/local/bin/elixir
 defmodule Solution do
+    def diagonal2(board) do
+    	board |> Enum.reverse
+	      |> Enum.with_index
+	      |> Enum.map(fn({row, index}) -> Enum.at(row, index) end)
+    end
+    def diagonal(board) do
+	for {row, idx} <- Enum.with_index(board),
+   		{col, ^idx} <- Enum.with_index(row), do: col
+    end
+    def transpose(rows) do
+	  rows
+	  |> List.zip
+	  |> Enum.map(&Tuple.to_list/1)
+	end
     def check(board, symbol, player) do
 	for row <- 0..2 do
 		x = board |> Enum.at(row)
@@ -7,28 +21,27 @@ defmodule Solution do
 			IO.puts player
 			read()
 		end
-		
 	end
+	diag = board |> diagonal()
+	if Enum.at(diag, 0) === Enum.at(diag, 1) and Enum.at(diag, 2) === symbol and Enum.at(diag, 2) === Enum.at(diag, 0) do
+		IO.puts player
+		read()
+        end
+	t_board = board |> transpose()
 	for row <- 0..2 do
-	    initial = board|>Enum.at(row)|>Enum.at(0)
-	    IO.puts(initial)
-	    count = 0
-	    for colum <- 0..2 do    
-		value = board|>Enum.at(row)|>Enum.at(colum)
-		IO.puts(value)
-		if value === initial and value !== " " do
-		   count = count + 1
-		   IO.puts(count)
+		x = t_board |> Enum.at(row)
+		if Enum.at(x, 0) === Enum.at(x, 1) and Enum.at(x, 2) === symbol and Enum.at(x, 2) === Enum.at(x, 0) do
+			IO.puts player
+			read()
 		end
-		IO.puts("-----")
-	    end
-	    if count == 3 do
-	       if initial == symbol do
-		  IO.puts player
-		  read()
-	       end
-	    end
-	   end	
+	end
+	diag2 = board |> diagonal2()
+	if Enum.at(diag2, 0) === Enum.at(diag2, 1) and Enum.at(diag2, 2) === symbol and Enum.at(diag2, 2) === Enum.at(diag2, 0) do
+		IO.puts player
+		read()
+        end
+
+
     end
     def update_list(board, idx, player) do
 		x = idx - 1 |> div 3
