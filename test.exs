@@ -49,7 +49,7 @@ defmodule Solution do
 		#foo = List.replace_at(foo,0,List.replace_at(Enum.at(foo,1),0,5))
 		board = List.replace_at(board, x, List.replace_at(Enum.at(board, x), y, player))
     end
-   
+
     def get_at_index(board, idx) do
 		x = idx - 1 |> div 3
 		y = idx - 1 |> rem 3
@@ -60,7 +60,7 @@ defmodule Solution do
 		if turn === 1 do
 			IO.puts "player 1(X)  waiting......"
 			data = IO.read(:stdio, :line) |> String.trim |> String.to_integer
-			if data > 9 or data < 0 do 
+			if data > 9 or data < 0 do
 				IO.puts "Invalid position"
 				ptp_play(board, counter, 1)
 			end
@@ -70,21 +70,21 @@ defmodule Solution do
 				ptp_play(board, counter, 1)
 			end
 			board = update_list(board, data, "X")
-			print_grid(board) 
+			print_grid(board)
 			check(board, "X", "Player 1 Won")
 			counter = counter + 1
 			if counter < 10 do
 				ptp_play(board, counter, 2)
 			end
 		end
-		#board	
-		#|> Enum.at(data - 1 |> div 3)		
+		#board
+		#|> Enum.at(data - 1 |> div 3)
 		#|> Enum.at(data - 1 |> rem 3)
 		#|> IO.puts()
 		if turn === 2 do
 			IO.puts "player 2(O)  waiting......"
 			data = IO.read(:stdio, :line) |> String.trim |> String.to_integer
-			if data > 9 or data < 0 do 
+			if data > 9 or data < 0 do
 				IO.puts "Invalid position"
 				ptp_play(board, counter, 1)
 			end
@@ -94,7 +94,7 @@ defmodule Solution do
 				ptp_play(board, counter, 2)
 			end
 			board = update_list(board, data, "O")
-			print_grid(board) 
+			print_grid(board)
 			check(board, "O", "Player 2 Won")
 			counter = counter + 1
 			if counter < 10 do
@@ -102,7 +102,7 @@ defmodule Solution do
 			end
 		end
 		#board
-		#|> Enum.at(data - 1 |> div 3)		
+		#|> Enum.at(data - 1 |> div 3)
 		#|> Enum.at(data - 1 |> rem 3)
 		#|> IO.puts()
     end
@@ -118,27 +118,32 @@ defmodule Solution do
     		|> Enum.join("\n---+---+---\n")
     		|> IO.puts()
     end
-    #Enter your code here. Read input from STDIN. Print output to STDOUT
-    def help_tic do
-	IO.puts "Help: "
-    end
+  #Enter your code here. Read input from STDIN. Print output to STDOUT
+  def help_tic do
+	  IO.puts "\n\nTic Tac Toe HELP"
+    IO.puts "The grid is represented as follows:"
+    IO.puts "1  |2  |3\n---+---+---\n4  |5  |6\n---+---+---\n7  |8  |9"
+    IO.puts "To make any move you have to use numbers from 1 to 9 mapping the position desired to mark."
+    IO.puts "Player #1 will use the 'X' mark by default, Player #2 will use the 'O' mark."
+    IO.puts "In case of tie, Player #1 win, sad but true!\n\n"
+  end
     def ptp do
 	IO.puts "you have choosen player to player mode"
 	IO.puts "use numbers 1..9\n"
-	board = [["1","2","3"], ["4","5","6"], ["7","8","9"]] 
+	board = [["1","2","3"], ["4","5","6"], ["7","8","9"]]
 	print_grid(board)
 	IO.puts "\nLet's play"
-	board = [[" "," "," "], [" "," "," "], [" "," "," "]] 
+	board = [[" "," "," "], [" "," "," "], [" "," "," "]]
 	print_grid(board)
 	ptp_play(board, 0, 1)
     end
     def ptb do
 	IO.puts "you have choosen player to bot mode "
 	IO.puts "use numbers 1..9\n"
-	board = [["1","2","3"], ["4","5","6"], ["7","8","9"]] 
+	board = [["1","2","3"], ["4","5","6"], ["7","8","9"]]
 	print_grid(board)
 	IO.puts "\nLet's play"
-	board = [[" "," "," "], [" "," "," "], [" "," "," "]] 
+	board = [[" "," "," "], [" "," "," "], [" "," "," "]]
 	print_grid(board)
 	ptp_play(board, 0, 1)
     end
@@ -151,7 +156,7 @@ defmodule Solution do
         case IO.read(:stdio, :line) do
             :eof -> :ok
             {:error, reason} -> IO.puts "Error: #{reason}"
-            data -> 
+            data ->
 		if data === "1\n" do
 			ptp()
 		end
