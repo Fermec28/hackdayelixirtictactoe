@@ -92,7 +92,12 @@ defmodule Solution do
 
   #Enter your code here. Read input from STDIN. Print output to STDOUT
   def help_tic do
-	  IO.puts "Help: "
+	  IO.puts "\n\nTic Tac Toe HELP"
+    IO.puts "The grid is represented as follows:"
+    IO.puts "1  |2  |3\n---+---+---\n4  |5  |6\n---+---+---\n7  |8  |9"
+    IO.puts "To make any move you have to use numbers from 1 to 9 mapping the position desired to mark."
+    IO.puts "Player #1 will use the 'X' mark by default, Player #2 will use the 'O' mark."
+    IO.puts "In case of tie, Player #1 win, sad but true!\n\n"
   end
 
   def ptp do
