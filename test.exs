@@ -23,8 +23,8 @@ defmodule Solution do
 	    end
 	    if count == 3 do
         if initial == symbol do
-        IO.puts player
-        read()
+          IO.puts player
+          read()
         end
 	    end
 	  end
