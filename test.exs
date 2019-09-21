@@ -70,9 +70,9 @@ defmodule Solution do
 				ptb_play(board, counter, 1)
 			end
 			board = update_list(board, data, "X")
+			counter = counter + 1
 			print_grid(board) 
 			check(board, "X", "Player 1 Won")
-			counter = counter + 1
 			if counter < 10 do
 				ptb_play(board, counter, 2)
 			end
@@ -89,9 +89,9 @@ defmodule Solution do
 				ptb_play(board, counter, 2)
 			end
 			board = update_list(board, data, "O")
+			counter = counter + 1
 			print_grid(board) 
 			check(board, "O", "Tic Tac Toe  Won")
-			counter = counter + 1
 			if counter < 10 do
 				ptb_play(board, counter, 1)
 			end
@@ -118,7 +118,7 @@ defmodule Solution do
 			print_grid(board)
 			check(board, "X", "Player 1 Won")
 			counter = counter + 1
-			if counter < 10 do
+			if counter < 9 do
 				ptp_play(board, counter, 2)
 			end
 		end
